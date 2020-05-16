@@ -153,17 +153,3 @@ resource "aws_nat_gateway" "ninja" {
     var.tags
   )
 }
-
-resource "aws_network_acl" "ninja" {
-  vpc_id = aws_vpc.ninja.id
-
-  tags = merge(            
-    {                      
-      Name        = "Ninja_NACL",
-      Project     = var.project,
-      Environment = var.environment 
-    },                     
-    var.tags               
-  )                        
-}        
-              
