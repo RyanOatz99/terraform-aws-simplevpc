@@ -5,12 +5,12 @@ output "id" {
 
 output "public_subnet_ids" {
   value       = aws_subnet.public.*.id
-  description = "List of public subnet ID"
+  description = "List of public subnet IDs"
 }
 
 output "private_subnet_ids" {
   value       = aws_subnet.private.*.id
-  description = "List of private subnet ID"
+  description = "List of private subnet IDs"
 }
 
 output "cidr_block" {
