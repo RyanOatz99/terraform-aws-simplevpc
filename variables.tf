@@ -1,7 +1,7 @@
 variable "name" {
   default     = "Ninja_VPC"
   type        = string
-  description = "Ninja Games Day VPC"
+  description = "Name of the Virtual Private Cloud ( VPC )"
 }
 
 variable "project" {
