@@ -153,3 +153,23 @@ resource "aws_nat_gateway" "ninja" {
     var.tags
   )
 }
+
+##### VPC ENDPOINT #####
+
+resource "aws_vpc_endpoint" "s3" {
+  vpc_id       = aws_vpc.ninja.id
+  service_name = "com.amazonaws.${var.region}.s3"
+  route_table_ids = flatten([
+    aws_route_table.public.id,
+    aws_route_table.private.*.id
+  ])
+
+  tags = merge(
+    {
+      Name        = "VPC_EP_S3",
+      Project     = var.project,
+      Environment = var.environment
+    },
+    var.tags
+  )
+}
