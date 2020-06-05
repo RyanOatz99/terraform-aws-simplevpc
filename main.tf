@@ -173,3 +173,57 @@ resource "aws_vpc_endpoint" "s3" {
     var.tags
   )
 }
+
+##### EFS ####
+
+resource "aws_security_group" "allow_tls" {
+  name        = "Allow NFS"
+  description = "Allow NFS inbound traffic from VPC"
+  vpc_id      = aws_vpc.ninja.id
+
+  ingress {
+    description = "NFS from VPC"
+    from_port   = 2049
+    to_port     = 2049
+    protocol    = "tcp"
+    cidr_blocks = ["10.0.0.0/16"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = merge(
+    {   
+      Name        = "EFS-ALLOW-FROM-VPC",
+      Project     = var.project,
+      Environment = var.environment
+    },  
+    var.tags
+  )     
+}       
+
+resource "aws_efs_file_system" "ninja-efs" {
+  creation_token = "efs-ecs"
+  encrypted = var.encrypted
+
+  tags = merge(
+    {
+      Name        = "EFS-ECS",
+      Project     = var.project,
+      Environment = var.environment
+    },
+    var.tags
+  )
+} 
+
+resource "aws_efs_mount_target" "efs_target" {
+  count = length(var.private_subnet_cidr_blocks)
+
+  file_system_id = aws_efs_file_system.ninja-efs.id
+  subnet_id      = aws_subnet.private[count.index].id
+  security_groups = [aws_security_group.allow_tls.id]
+}

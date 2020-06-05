@@ -15,7 +15,7 @@ variable "environment" {
 }
 
 variable "region" {
-  default     = "us-east-1"
+  default     = "us-west-2"
   type        = string
   description = "Region of the VPC"
 }
@@ -45,9 +45,15 @@ variable "private_subnet_cidr_blocks" {
 }
 
 variable "availability_zones" {
-  default     = ["us-east-1a", "us-east-1b"]
+  default     = ["us-west-2a", "us-west-2b"]
   type        = list
   description = "List of availability zones"
+}
+
+variable "encrypted" {
+  description = "Encrypt file system."
+  type        = bool
+  default     = true
 }
 
 variable "tags" {
@@ -55,4 +61,3 @@ variable "tags" {
   type        = map(string)
   description = "Extra tags to attach to the VPC resources"
 }
-

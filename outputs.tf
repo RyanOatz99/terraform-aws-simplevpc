@@ -22,3 +22,13 @@ output "nat_gateway_ip" {
   value       = aws_eip.nat.*.public_ip
   description = "List of Elastic IPs associated with NAT gateways"
 }
+
+output "efs_encrpyted_or_not" {
+  value	      = var.encrypted
+  description = "Encrypt file system or not"
+}
+
+output "efs_dns_name" {
+  value       = aws_efs_mount_target.efs_target.*.dns_name
+  description = "List of DNS mount points, one per subnet."
+}
