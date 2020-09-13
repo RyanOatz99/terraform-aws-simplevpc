@@ -1,5 +1,5 @@
 output "id" {
-  value       = aws_vpc.ninja.id
+  value       = aws_vpc.vpc.id
   description = "VPC ID"
 }
 
@@ -24,7 +24,7 @@ output "nat_gateway_ip" {
 }
 
 output "efs_encrpyted_or_not" {
-  value	      = var.encrypted
+  value       = var.encrypted
   description = "Encrypt file system or not"
 }
 

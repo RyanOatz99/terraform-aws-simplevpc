@@ -1,5 +1,5 @@
 variable "name" {
-  default     = "Ninja_VPC"
+  default     = "Terraform_VPC"
   type        = string
   description = "Name of the Virtual Private Cloud ( VPC )"
 }
@@ -15,13 +15,13 @@ variable "environment" {
 }
 
 variable "region" {
-  default     = "us-west-2"
+  default     = "ap-southeast-1"
   type        = string
   description = "Region of the VPC"
 }
 
 variable "igw" {
-  default     = "Ninja_IGW"
+  default     = "TERRAFORM_IGW"
   type        = string
   description = "Name of the Internet Gateway"
 }
@@ -45,7 +45,7 @@ variable "private_subnet_cidr_blocks" {
 }
 
 variable "availability_zones" {
-  default     = ["us-west-2a", "us-west-2b"]
+  default     = ["ap-southeast-1a", "ap-southeast-1b"]
   type        = list
   description = "List of availability zones"
 }
